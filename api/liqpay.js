@@ -17,6 +17,7 @@ export default function handler(req, res) {
         currency: 'UAH',
         description,
         order_id,
+        result_url: "https://твій-сайт.com/payment-result",
         sandbox: 1 // 1 = тестовий режим, 0 = бойовий
     };
 

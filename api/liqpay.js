@@ -18,7 +18,7 @@ export default function handler(req, res) {
         description,
         order_id,
         result_url: "http://localhost:3000/",
-        sandbox: 1 // 1 = тестовий режим, 0 = бойовий
+        sandbox: 0 // 1 = тестовий режим, 0 = бойовий
     };
 
     const jsonString = JSON.stringify(data);

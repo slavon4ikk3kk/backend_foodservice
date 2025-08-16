@@ -29,5 +29,5 @@ export default function handler(req, res) {
         .update(private_key + base64Data + private_key)
         .digest('base64');
 
-    res.status(200).json({ data: base64Data, signature });
+    res.status(200).json({ data: base64Data, signature: signature });
 }

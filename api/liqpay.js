@@ -4,12 +4,10 @@ export default function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    const { amount, description} = req.query;
+    const { amount, description, order_id } = req.query;
 
     const public_key = process.env.LIQPAY_PUBLIC_KEY;
     const private_key = process.env.LIQPAY_PRIVATE_KEY;
-
-    const order_id = `order_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
 
     const data = {
         public_key,

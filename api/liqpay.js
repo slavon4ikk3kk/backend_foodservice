@@ -10,7 +10,7 @@ export default function handler(req, res) {
     const private_key = process.env.LIQPAY_PRIVATE_KEY;
 
     const order_id = `order_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
-    
+
     const data = {
         public_key,
         version: 3,
@@ -20,7 +20,7 @@ export default function handler(req, res) {
         description,
         order_id,
         result_url: "http://localhost:3000/",
-        sandbox: 0 // 1 = тестовий режим, 0 = бойовий
+        sandbox: 1 // 1 = тестовий режим, 0 = бойовий
     };
 
     const jsonString = JSON.stringify(data);

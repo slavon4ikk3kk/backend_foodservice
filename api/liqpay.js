@@ -1,34 +1,35 @@
-import crypto from 'crypto';
+import crypto from "crypto";
 
 export default function handler(req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    const { amount, description} = req.query;
+  const { amount, description } = req.query;
 
-    const public_key = process.env.LIQPAY_PUBLIC_KEY;
-    const private_key = process.env.LIQPAY_PRIVATE_KEY;
+  const public_key = process.env.LIQPAY_PUBLIC_KEY;
+  const private_key = process.env.LIQPAY_PRIVATE_KEY;
 
-    const order_id = `order_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
-    
-    const data = {
-        public_key,
-        version: 3,
-        action: 'pay',
-        amount,
-        currency: 'UAH',
-        description,
-        order_id,
-        result_url: "http://localhost:3000/",
-        sandbox: 0 // 1 = тестовий режим, 0 = бойовий
-    };
+  // унікальний order_id
+  const order_id = "order_" + Date.now() + "_" + Math.floor(Math.random() * 1000);
 
-    const jsonString = JSON.stringify(data);
-    const base64Data = Buffer.from(jsonString).toString('base64');
-    const signature = crypto
-        .createHash('sha1')
-        .update(private_key + base64Data + private_key)
-        .digest('base64');
+  const payload = {
+    public_key,
+    version: 3,
+    action: "pay",
+    amount,
+    currency: "UAH",
+    description,
+    order_id,
+    sandbox: 1, // тестовий режим
+  };
 
-    res.status(200).json({ data: base64Data, signature: signature });
+  // !!! ВАЖЛИВО: stringify без пробілів
+  const jsonString = JSON.stringify(payload);
+
+  const base64Data = Buffer.from(jsonString).toString("base64");
+
+  // сигнатура тільки так: private + data + private
+  const signature = crypto
+    .createHash("sha1")
+    .update(private_key + base64Data + private_key)
+    .digest("base64");
+
+  res.status(200).json({ data: base64Data, signature });
 }

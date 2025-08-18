@@ -22,13 +22,13 @@ export default async function handler(req, res) {
     const { status, err_description, order_id } = decodedData;
 
     if (status === 'error') {
-        console.error(`❌ Помилка платежу для замовлення ${order_id}: ${err_description}`);
+        console.error(` Помилка платежу для замовлення ${order_id}: ${err_description}`);
         // Тут можеш зберегти у БД або відправити сповіщення
     } else if (status === 'success') {
-        console.log(`✅ Успішний платіж для замовлення ${order_id}`);
+        console.log(`Успішний платіж для замовлення ${order_id}`);
         // Тут можеш оновити статус замовлення
     } else {
-        console.log(`ℹ️ Статус платежу для замовлення ${order_id}: ${status}`);
+        console.log(`Статус платежу для замовлення ${order_id}: ${status}`);
     }
 
     res.status(200).json({ message: 'Callback processed' });

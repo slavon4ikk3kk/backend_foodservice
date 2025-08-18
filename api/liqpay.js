@@ -22,7 +22,7 @@ export default function handler(req, res) {
         currency: 'UAH',
         description,
         order_id,
-        result_url: "https://backend-foodservice.vercel.app/api/payment-result", // куди повернеться користувач
+        result_url: "https://localhost:3000/api/payment-result", // куди повернеться користувач
         server_url: "https://backend-foodservice.vercel.app/api/liqpay-callback", // куди LiqPay надішле статус
         sandbox: 1 // 1 = тестовий режим
     };

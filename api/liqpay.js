@@ -4,6 +4,11 @@ export default function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+
     const { amount, description, order_id } = req.query;
 
     const public_key = process.env.LIQPAY_PUBLIC_KEY;
@@ -17,8 +22,9 @@ export default function handler(req, res) {
         currency: 'UAH',
         description,
         order_id,
-        result_url: "http://localhost:3000/",
-        sandbox: 1 // 1 = тестовий режим, 0 = бойовий
+        result_url: "http://localhost:3000/payment-result", // куди повернеться користувач
+        server_url: "http://localhost:3000/api/liqpay-callback", // куди LiqPay надішле статус
+        sandbox: 1 // 1 = тестовий режим
     };
 
     const jsonString = JSON.stringify(data);

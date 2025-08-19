@@ -9,10 +9,12 @@ export default function handler(req, res) {
         return res.status(200).end();
     }
 
-    const { amount, description, order_id } = req.query;
+    
 
     const public_key = process.env.LIQPAY_PUBLIC_KEY;
     const private_key = process.env.LIQPAY_PRIVATE_KEY;
+
+    const { amount, description, order_id } = req.query;
 
     const data = {
         public_key,
@@ -23,6 +25,7 @@ export default function handler(req, res) {
         description,
         order_id,
         result_url: "https://localhost:3000/api/payment-result", // куди повернеться користувач
+        server_url: "https://backend-foodservice.vercel.app/api/liqpay-callback",
         sandbox: 1 // 1 = тестовий режим
     };
 

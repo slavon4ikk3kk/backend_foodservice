@@ -24,7 +24,7 @@ export default function handler(req, res) {
         currency: 'UAH',
         description,
         order_id,
-        result_url: "https://localhost:3000/", // куди повернеться користувач
+        result_url: "https://www.foodservice.com.ua/", // куди повернеться користувач
         server_url: "https://backend-foodservice.vercel.app/api/liqpay-callback",
     };
 

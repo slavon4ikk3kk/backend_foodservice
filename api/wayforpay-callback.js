@@ -8,7 +8,7 @@ export const config = {
   },
 };
 
-const PRIVATE_KEY = process.env.LIQPAY_PRIVATE_KEY;
+const PRIVATE_KEY = process.env.WAYFORPAY_SECRET_KEY;
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -40,7 +40,7 @@ export default async function handler(req, res) {
   }
 
   // TODO: тут ти можеш зберегти decodedData у базу або обробити як треба
-  console.log('✅ LiqPay payment received:', decodedData);
+  console.log('✅ WayForPay payment received:', decodedData);
 
   // Обов'язково відповісти 200 OK, інакше LiqPay буде повторно надсилати запити
   res.status(200).end('OK');

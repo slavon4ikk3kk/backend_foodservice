@@ -90,7 +90,7 @@ export default async function handler(req, res) {
         productPrice: [productPrice],
         productCount: [productCount],
         merchantSignature,
-        serviceUrl: 'https://foodservicenumbers2.vercel.app/api/wayforpay-callback',
+        serviceUrl: 'https://backend-foodservice.vercel.app/api/wayforpay-callback',
         returnUrl: 'https://kafe-dvorik.in.ua/',
       });
     } catch (error) {
